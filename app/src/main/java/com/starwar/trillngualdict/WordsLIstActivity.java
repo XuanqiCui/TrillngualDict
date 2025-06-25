@@ -1,10 +1,12 @@
 package com.starwar.trillngualdict;
 
 import android.app.ListActivity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -36,6 +38,15 @@ public class WordsLIstActivity extends AppCompatActivity {
         setContentView(R.layout.activity_words_list);
 
         initView();
+
+        lv_words.setOnItemClickListener(((parent, view, position, id) -> {
+            TextView tvId = view.findViewById(R.id.tv_item_context);
+            String item = tvId.getText().toString();
+//            Log.d("点击项", "你点击的是：" + item);
+            Intent intent = new Intent(this, WordDetailActivity.class);
+            intent.putExtra("englishwords", item);
+            startActivity(intent);
+        }));
     }
 
     private void initView() {
